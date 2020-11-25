@@ -44,7 +44,7 @@ mod mock;
 pub use origin::{Origin, ensure_parachain};
 
 /// Schedule a para to be initialized at the start of the next session with the given genesis data.
-pub fn schedule_para_initialize<T: paras::Trait>(
+pub fn schedule_para_initialize<T: paras::Config>(
 	id: primitives::v1::Id,
 	genesis: paras::ParaGenesisArgs,
 ) {
@@ -57,7 +57,7 @@ where
 	T: paras::Trait
 	+ dmp::Trait
 	+ ump::Trait
-	+ hrmp::Trait,
+	+ hrmp::Config,
 {
 	<paras::Module<T>>::schedule_para_cleanup(id);
 	<dmp::Module<T>>::schedule_para_cleanup(id);
